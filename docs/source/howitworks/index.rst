@@ -81,3 +81,5 @@ that the report has not been processed by the blacklisting system's rules yet. T
 a boolean value.
 
 If the task ID is still in the 'queue' indice, it will now be removed.
+
+When there are no more task IDs in the 'queue' indice, it will wait for 5 minutes before checking again.
