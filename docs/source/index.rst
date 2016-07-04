@@ -1,22 +1,23 @@
-.. dfi-docs documentation master file, created by
-   sphinx-quickstart on Mon Jul  4 00:39:50 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+DFI blacklisting system
+=======================
 
-Welcome to dfi-docs's documentation!
-====================================
+This piece of documentation will teach you:
+
+- How to setup the blacklisting system
+- How to use the blacklisting system
+- How to blackling system works (including what all classes do)
+- How to add new rule logic
+
+
+A short description:
+The blacklisting system read binaries from a folder, submits these to a `Cuckoo Sandbox <https://cuckoosandbox.org/>`_ instance for analysis,
+downloads the results, reads these reports and applies its own logic to filter out hashes of malicious
+binaries.
+
+The md5 hashes of the malicious binaries are stored and retrievable through a web API.
+You could use these hashes for the creation of IDS alerts.
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+   howitworks/index
