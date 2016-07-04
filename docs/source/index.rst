@@ -9,7 +9,8 @@ This piece of documentation will teach you:
 - How to add new rule logic
 
 
-A short description:
+**A short description**:
+
 The blacklisting system read binaries from a folder, submits these to a `Cuckoo Sandbox <https://cuckoosandbox.org/>`_ instance for analysis,
 downloads the results, reads these reports and applies its own logic to filter out hashes of malicious
 binaries.
