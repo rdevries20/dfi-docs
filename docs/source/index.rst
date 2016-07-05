@@ -21,5 +21,6 @@ You could use these hashes for the creation of IDS alerts.
 Contents:
 
 .. toctree::
+   usage/index
    howitworks/index
    extending/index
