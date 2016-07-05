@@ -22,3 +22,4 @@ Contents:
 
 .. toctree::
    howitworks/index
+   extending/index
