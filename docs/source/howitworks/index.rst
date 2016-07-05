@@ -1,7 +1,65 @@
 How it works
 ============
 The blacklisting system consists of four parts. Each of these parts has a
-seperate run script.
+seperate run script. The scripts use the indices in Elasticsearch.
+
+The existing Elasticsearch indices
+----------------------------------
+There are six different indices. Each of these indices stores
+other data.
+
+The list below will show the name of the indice, the corresponding mapping file, and
+the document type name used to store items under the indice.
+
+queue
+	**File:** queue.json - **Document type name:** item
+
+	This indice stores a pieces of info on a binary submitted to Cuckoo.
+	As the name suggests, it is used as a queue so the blacklisting system knows
+	what was submitted to Cuckoo.
+
+hashes
+	**File:** hashes.json - **Document type name:** item
+
+	This indice stores sha256 hashes of all submitted binaries. It is used
+	to see if a binary was submitted before.
+
+cuckoo
+	**File:** cuckoo.json - **Document type name:** report
+
+	This indice stores all Cuckoo reports that were filtered by the report_hoarder.py.
+
+blacklist
+	**File:** blacklist.json
+	
+	**Document type name:** This depends on the used 'type'. Entries in the blacklist indice
+	are stored under their type name. At this moment only the 'hash' type is supported.
+	So for that type the document name is hash.
+
+	This indice stores values that have been blacklisted by the blacklist_processor.py. It also
+	stores the reason something was blacklisted and the score for the report to which the blacklisted
+	value belongs. For the hash' type, an MD5 hash of the binary is stored.
+
+whitelist
+	**File:** whitelist.json - **Document type name:** subnet
+
+	This indice stores IP subnets that should be excluded from counting if a rule matches.
+	The subnets are stored in CIDR notation. If you would add a new subnet, you will have to provide
+	something like '192.168.0.0/16' and an owner, which would be 'private' in this case.
+
+	When a Cuckoo report is loaded into memory from the cuckoo indice, a new object attribute will be added which
+	will only reside in memory and is called 'ip_wl_filtered'. This is a list which contains all IPs from the Cuckoo report
+	minus IPs that are in one of the whitelisted subnets.
+
+	IP subnets can be added and removed through the API.
+
+third_party_blacklist
+	**File:** third_party_blacklist.json - **Document type name:** C&C
+
+	This indice is used to store lists of known malware command and control servers.
+	The indice can be filled by using the tool 'ThirdPartyBlacklist.py' in the utils folder.
+
+	The values in the indice are used by the '3rd_party_blacklist' rule.
 
 Binary submitting
 -----------------
@@ -13,8 +71,12 @@ It will then check if this hash is in the 'hashes' indice in the Elasticsearch s
 This indice is used to keep track of all earlier submitted binaries to prevent analysing the same
 binary more then once.
 
-If not present in this indice, it will then proceed to submit it to the Cuckoo Sandbox server and only
-after a successful submission, add the the hash, the Cuckoo task ID, and a timestamp to the 'queue' indice.
+If not present in this indice, it will then proceed to submit it to the Cuckoo Sandbox server using the extra option 'json.calls=0'
+
+*'json.calls=0' means that we ask Cuckoo not to store a list of all seperate API calls and their arguments in the report.
+We do not use these at this time and it is about 90% of the report. We do this to prevent getting reports of 500MB+* 
+
+Only after a successful submission, add the the hash, the Cuckoo task ID, and a timestamp to the 'queue' indice.
 This indice contains all binaries submitted to Cuckoo Sandbox and is used to keep track of the status of
 each task.
 
