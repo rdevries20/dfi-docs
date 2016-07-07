@@ -254,7 +254,7 @@ Log onto the ESXi server using the web interface or a different VMWare client.
 Browse the datastore and create a new folder with the name of the new machine for example cuckoo2.
 
 Then browse to the content of the Cuckoo base VM and copy the content of that folder and paste them in the newly created folder.
-Right click the “*.vmx” file and select “Add to inventory”. Select the appropriate name. When starting the machine for the first time, 
+Right click the “\*.vmx” file and select “Add to inventory”. Select the appropriate name. When starting the machine for the first time, 
 you will be asked if you moved or copied it. Select “**I copied it**”
 
 Note: The name for submitting samples to Cuckoo. Also make sure you run it after copying it. 
