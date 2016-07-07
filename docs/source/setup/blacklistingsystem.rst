@@ -150,7 +150,7 @@ The 'owner' field will be used as a description for the whitelisted IP subnet.
 Creating rules for the system
 -----------------------------
 
-These is an important, if not the most important part about the system.
+These is important, if not the most important part about the system.
 
 The rules do the matches in the data and determine the total endscore.
 
