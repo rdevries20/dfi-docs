@@ -63,7 +63,7 @@ Keep the file opened for the next step.
 
 **Disable JSON API calls**
 
-Open the reporting.conf file and set no to calls in the jasondump section::
+Open the reporting.conf file and set no to calls in the jsondump section::
 
 	[jsondump]
 	calls = no
@@ -310,4 +310,4 @@ Restart the DHCP server::
 
 When a new machine has been deployed, and the IP settings have been set either by static or using DHCP. Reboot the virtual machine. 
 After the reboot has been completed check the IP address, if it is what it should be create a snapshot with the name “**Snapshot**”. 
-This way the agent running on the machine has been associated with the correct at, allowing the Cuckoo host and agent to communicate with each other.
+This way the agent running on the machine has been associated with the correct IP, allowing the Cuckoo host and agent to communicate with each other.
