@@ -6,4 +6,5 @@ how to setup Cuckoo and how to setup the blacklisting
 system
 
 .. toctree::
+   setupcuckoo/index
    blacklistingsystem
