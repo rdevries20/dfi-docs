@@ -7,4 +7,5 @@ system
 
 .. toctree::
    setupcuckoo/index
+   setupelasticsearch/index
    blacklistingsystem
