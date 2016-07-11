@@ -13,7 +13,7 @@ Execute the script on a base install of Ubuntu Server 16.04 LTS::
 
 	$ bash ElasticSearchSetup.bash
 
-The CuckooSetup script has various different modules. Each of these modules has a specific name and function.
+The ElasticSearchSetup script has various different modules. Each of these modules has a specific name and function.
 This will allow the user to specify which modules is needed. By using these various modules, you will have a complete modular setup.
 
 During the execution of this script you will be prompted to press “**Enter**” to agree with Oracle Java’s policy
