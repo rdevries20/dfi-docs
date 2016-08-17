@@ -107,4 +107,51 @@ the binary removed any directories in the "C:\Windows\system32" or the "C:\Windo
 		]
 	}
 
+
+Grouping rules together
+-----------------------
+
+It might happen that you want a rule to match only if another rules also matches, this is where
+rule grouping can be used. It is possible to add the key "group_id" to a rule and give it a positive integer value and
+1 or higher.
+
+By doing this, the total blacklisting score will only be incremented if all rules in a certain group were matched.
+
+
+ .. code-block:: javascript
+    :linenos:
+
+	{
+		"info": {
+		"	type": "hash"
+		},
+		"rules": {
+			"cuckoo_score": [
+				{
+					"rules": ["0.0-2.0"],
+					"score": 0.5
+				}
+			],
+			"ip_in_subnet": [
+				{
+					"rules": ["8.8.0.0/16", "23.116.11.0/24"],
+					"score": 0.8
+				},
+				{
+					"rules": ["44.22.1.0/24", "119.23.0.0/16"],
+					"score": 1.0,
+					"group_id": 3
+				}
+			],
+			"dir_removed": [
+				{
+					"rules": ["C:\Windows\system32*", "C:\Windows\SysWOW64*"],
+					"score": 2.0,
+					"group_id": 3
+				}
+			]
+		}
+	}
+
+	
 The rules are now ready for use.
